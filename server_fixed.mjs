@@ -75,8 +75,8 @@ app.post('/create-checkout-session', async (req, res) => {
         },
         quantity: parseInt(item.quantity || 1),
       })),
-      success_url: 'http://localhost:4242/success.html?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'http://localhost:4242/cancel.html',
+      success_url: 'https://restaurantdesigner.github.io/sublue/success.html?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'https://restaurantdesigner.github.io/sublue/cancel.html',
       shipping_address_collection: { allowed_countries: ['ES', 'FR', 'PT'] },
       phone_number_collection: { enabled: true },
       metadata: { source: 'cart' }
