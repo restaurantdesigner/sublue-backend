@@ -16,8 +16,10 @@ console.log("📦 .env STRIPE_WEBHOOK_SECRET:", process.env.STRIPE_WEBHOOK_SECRE
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const app = express();
 
+const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS_JSON);
+
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(__dirname, 'credentials.json'),
+  credentials,
   scopes: ['https://www.googleapis.com/auth/spreadsheets']
 });
 const SPREADSHEET_ID = '1oFM818LNbAgwb-SQBZxmH2UaG2RJQg1nFJymO7THpDw';
