@@ -64,24 +64,25 @@ app.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       mode: 'payment',
       line_items: items.map(item => ({
-        price_data: {
-          currency: 'eur',
-          product_data: {
-            name: item.name,
-            images: [item.image],
-            metadata: {
-  id: item.id,
-  color: item.color || 'N/A',
-  deliveryDate: item.deliveryDate || 'N/A',
-  serialNumbers: JSON.stringify(item.serialNumbers || [])
-}
-,
-          unit_amount: Math.round(Number(item.price) * 100)
-        },
-        quantity: parseInt(item.quantity || 1),
-      })),
+  price_data: {
+    currency: 'eur',
+    product_data: {
+      name: item.name,
+      images: [item.image],
+      metadata: {
+        id: item.id,
+        color: item.color,
+        deliveryDate: item.deliveryDate,
+        serialNumbers: JSON.stringify(item.serialNumbers || [])
+      }
+    },
+    unit_amount: Math.round(Number(item.price) * 100)
+  },
+  quantity: parseInt(item.quantity || 1),
+})),
+
       success_url: 'https://restaurantdesigner.github.io/sublue/success.html?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'https://restaurantdesigner.github.io/sublue/cancel.html',
+  cancel_url: 'https://restaurantdesigner.github.io/sublue/cancel.html',
       shipping_address_collection: { allowed_countries: ['ES', 'FR', 'PT'] },
       phone_number_collection: { enabled: true },
       metadata: { source: 'cart' }
