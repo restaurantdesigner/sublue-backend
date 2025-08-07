@@ -69,8 +69,13 @@ app.post('/create-checkout-session', async (req, res) => {
           product_data: {
             name: item.name,
             images: [item.image],
-            metadata: { id: item.id }
-          },
+            metadata: {
+  id: item.id,
+  color: item.color || 'N/A',
+  deliveryDate: item.deliveryDate || 'N/A',
+  serialNumbers: JSON.stringify(item.serialNumbers || [])
+}
+,
           unit_amount: Math.round(Number(item.price) * 100)
         },
         quantity: parseInt(item.quantity || 1),
