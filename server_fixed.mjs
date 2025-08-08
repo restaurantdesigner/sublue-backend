@@ -98,13 +98,14 @@ app.post('/create-checkout-session', async (req, res) => {
 app.get('/checkout-session/:id', async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.retrieve(req.params.id, {
-      expand: ['line_items', 'customer_details']
+      expand: ['line_items', 'customer_details', 'line_items.data.price.product']
     });
     res.json(session);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 async function updateStockFromCheckoutItems(items) {
   const sheets = google.sheets({ version: 'v4', auth: await auth.getClient() });
